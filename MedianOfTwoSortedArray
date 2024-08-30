@@ -1,0 +1,52 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        int n1 =nums1.length;
+        int n2 =nums2.length;
+        int a =n1+n2;
+        int[] nums3 =new int[a];
+        System.arraycopy(nums1, 0, nums3, 0, n1);
+        System.arraycopy(nums2, 0, nums3, n1, n2);
+        int mean =0;
+
+        
+           if(a/2 !=1){
+
+              return((nums3[(a/2)-1]+nums3[(a/2)])/2.0);
+           
+            
+           }
+           else{
+              return( nums3[(a/2)+1]);
+           }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read first array
+        System.out.println("Enter the number of elements in the first array:");
+        int n1 = scanner.nextInt();
+        int[] nums1 = new int[n1];
+        System.out.println("Enter the elements of the first array (sorted):");
+        for (int i = 0; i < n1; i++) {
+            nums1[i] = scanner.nextInt();
+        }
+
+        // Read second array
+        System.out.println("Enter the number of elements in the second array:");
+        int n2 = scanner.nextInt();
+        int[] nums2 = new int[n2];
+        System.out.println("Enter the elements of the second array (sorted):");
+        for (int i = 0; i < n2; i++) {
+            nums2[i] = scanner.nextInt();
+        }
+
+        // Close scanner
+        scanner.close();
+
+        // Compute and display the median
+        Solution solution = new Solution();
+        double median = solution.findMedianSortedArrays(nums1, nums2);
+        System.out.println("Median: " + median);
+    }
+}
