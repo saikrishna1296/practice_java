@@ -1,0 +1,58 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+    
+        
+        HashMap<Integer, Integer> numToIndex = new HashMap<>();
+        
+        
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int complement = target - num;
+            
+            
+            if (numToIndex.containsKey(complement)) {
+                
+                return new int[] { numToIndex.get(complement), i };
+            }
+            
+            
+            numToIndex.put(num, i);
+        }
+        
+        
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Read the length of the array
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+        
+        int[] nums = new int[n];
+        
+        // Read the elements of the array
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        
+        // Read the target value
+        System.out.print("Enter the target value: ");
+        int target = scanner.nextInt();
+        
+        // Create an instance of TwoSum and find the indices
+        Solution ts = new Solution();
+        try {
+            int[] result = ts.twoSum(nums, target);
+            System.out.println("Indices: [" + result[0] + ", " + result[1] + "]");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        // Close the scanner
+        scanner.close();
+    }
+}
+  // add two numbers to get the target from array 
