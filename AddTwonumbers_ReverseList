@@ -1,0 +1,95 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read first linked list
+        System.out.print("Enter the number of elements in the first linked list: ");
+        int n1 = scanner.nextInt();
+        ListNode l1 = null, l1Tail = null;
+        System.out.println("Enter the elements of the first linked list (in reverse order):");
+        for (int i = 0; i < n1; i++) {
+            int value = scanner.nextInt();
+            ListNode newNode = new ListNode(value);
+            if (l1 == null) {
+                l1 = newNode;
+                l1Tail = l1;
+            } else {
+                l1Tail.next = newNode;
+                l1Tail = newNode;
+            }
+        }
+
+        // Read second linked list
+        System.out.print("Enter the number of elements in the second linked list: ");
+        int n2 = scanner.nextInt();
+        ListNode l2 = null, l2Tail = null;
+        System.out.println("Enter the elements of the second linked list (in reverse order):");
+        for (int i = 0; i < n2; i++) {
+            int value = scanner.nextInt();
+            ListNode newNode = new ListNode(value);
+            if (l2 == null) {
+                l2 = newNode;
+                l2Tail = l2;
+            } else {
+                l2Tail.next = newNode;
+                l2Tail = newNode;
+            }
+        }
+
+        // Compute the sum
+        ListNode result = addTwoNumbers(l1, l2);
+
+        // Print the result
+        System.out.print("The resulting linked list is: ");
+        printLinkedList(result);
+
+        scanner.close();
+    }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1, q = l2, current = dummyHead;
+        int carry = 0;
+
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;
+        }
+
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+
+        return dummyHead.next;
+    }
+
+    public static void printLinkedList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+        
+    }
