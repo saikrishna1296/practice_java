@@ -1,0 +1,41 @@
+class Solution {
+    public static int lengthOfLongestSubstring(String s) {
+        
+        HashSet<Character> charSet = new HashSet<>();
+        int maxLength = 0;
+        int start = 0;
+        
+        for (int end = 0; end < s.length(); end++) {
+            char currentChar = s.charAt(end);
+            
+            // Move the left pointer to remove duplicates
+            while (charSet.contains(currentChar)) {
+                charSet.remove(s.charAt(start));
+                start++;
+            }
+            
+            // Add the current character to the set
+            charSet.add(currentChar);
+            
+            // Update the maximum length
+            maxLength = Math.max(maxLength, end - start + 1);
+        }
+        
+        return maxLength;
+    }
+        
+    
+    public static void main(String[] args) {
+         Scanner scanner = new Scanner(System.in);
+        
+        // Read the input string
+        System.out.print("Enter the string: ");
+        String s = scanner.nextLine();
+        
+        // Find the length of the longest substring without repeating characters
+        int length = lengthOfLongestSubstring(s);
+        System.out.println("Length of the longest substring without repeating characters: " + length);
+        
+        scanner.close();
+    }
+}
